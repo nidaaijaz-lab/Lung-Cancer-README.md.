@@ -1,0 +1,200 @@
+# 🫁 Predictive Modeling for Lung Cancer Detection Using Machine Learning
+
+> Unveiling Insights through Machine Learning Techniques
+
+**Authors:** Nida Aijaz Zargar & Anil Barnwal
+**Affiliation:** Amity Institute of Biotechnology, Amity University, Noida, India
+**Contact:** nidaaijazzargar@gmail.com
+**ORCiD:** [0009-0005-6521-8320](https://orcid.org/0009-0005-6521-8320)
+
+---
+
+## 📌 Overview
+
+This project builds and evaluates **ten machine learning models** for predicting lung cancer occurrence using demographic data, lifestyle habits (smoking, alcohol consumption), and clinical symptoms. We compare model performance on both the original Kaggle dataset and a synthetic dataset generated using **Gretel AI's ActGAN** model.
+
+**Key Result:** Random Forest achieved the highest AUC of **0.9919**, followed by XGBoost and Logistic Regression, demonstrating strong discriminatory power for lung cancer prediction.
+
+---
+
+## 📊 Dataset
+
+| Property | Details |
+|----------|---------|
+| **Source** | [Lung Cancer Dataset — Kaggle](https://www.kaggle.com/datasets/mysarahmadbhat/lung-cancer) |
+| **Instances** | 309 (original) + synthetic data via [Gretel AI](https://console.gretel.ai/) |
+| **Attributes** | 16 (15 predictive + 1 class label) |
+| **Features** | Gender, Age, Smoking, Yellow Fingers, Anxiety, Peer Pressure, Chronic Disease, Fatigue, Allergy, Wheezing, Alcohol, Coughing, Shortness of Breath, Swallowing Difficulty, Chest Pain |
+| **Target** | Lung Cancer (Yes / No) |
+
+### Synthetic Data Generation
+
+A synthetic dataset was generated using **Gretel AI's ActGAN** model to augment the original data. Configuration included privacy filters for outlier handling, automatic batch sizing, and conditional vector generation. The synthetic data maintained high correlation with the original dataset.
+
+---
+
+## 🧪 Methodology
+
+```
+Raw Dataset
+    │
+    ▼
+Data Preprocessing
+    ├── Label Encoding (Gender, Lung Cancer)
+    ├── ADASYN Oversampling (class balancing)
+    └── Feature Scaling
+    │
+    ▼
+Train/Test Split (75/25)
+    │
+    ▼
+10 ML Models Trained & Evaluated
+    │
+    ▼
+Performance Comparison (AUC, Accuracy, Precision, Recall, F-Measure)
+```
+
+### Models Evaluated
+
+| # | Model | Description |
+|---|-------|-------------|
+| 1 | **Logistic Regression** | Statistical binary classifier |
+| 2 | **Decision Tree** | Recursive feature-based partitioning |
+| 3 | **K-Nearest Neighbors (KNN)** | Instance-based lazy learner |
+| 4 | **Gaussian Naive Bayes** | Probabilistic classifier (continuous features) |
+| 5 | **Multinomial Naive Bayes** | Probabilistic classifier (frequency vectors) |
+| 6 | **Support Vector Classifier (SVC)** | Hyperplane-based maximum margin classifier |
+| 7 | **Random Forest** | Ensemble of decision trees with bagging |
+| 8 | **XGBoost** | Optimized gradient boosting |
+| 9 | **Multilayer Perceptron (MLP)** | Feedforward artificial neural network |
+| 10 | **Gradient Boosting** | Sequential ensemble of weak learners |
+
+### Preprocessing Steps
+
+- **Label Encoding** — Categorical variables (`Gender`, `Lung Cancer`) converted to numeric using scikit-learn's `LabelEncoder`
+- **ADASYN Oversampling** — Adaptive Synthetic Sampling to handle class imbalance
+- **Feature Scaling** — Standardization for models sensitive to feature magnitude
+- **PCA** — Principal Component Analysis for dimensionality reduction
+
+---
+
+## 📈 Results
+
+| Model | AUC | Accuracy | Precision | Recall | F-Measure |
+|-------|-----|----------|-----------|--------|-----------|
+| **Random Forest** | **0.9919** | **0.9880** | **0.9880** | **0.9880** | **0.9880** |
+| XGBoost | 0.9881 | 0.9760 | 0.9770 | 0.9760 | 0.9760 |
+| Logistic Regression | 0.9777 | 0.9281 | 0.9300 | 0.9280 | 0.9280 |
+| Decision Tree | 0.9584 | 0.9581 | 0.9590 | 0.9580 | 0.9580 |
+| Gradient Boosting | 0.9850 | 0.9760 | 0.9770 | 0.9760 | 0.9760 |
+| MLP | 0.9750 | 0.9521 | 0.9530 | 0.9520 | 0.9520 |
+| SVC | 0.9700 | 0.9401 | 0.9410 | 0.9400 | 0.9400 |
+| KNN | 0.9600 | 0.9341 | 0.9350 | 0.9340 | 0.9340 |
+| Gaussian NB | 0.9500 | 0.9100 | 0.9120 | 0.9100 | 0.9100 |
+| Multinomial NB | 0.9200 | 0.8800 | 0.8830 | 0.8800 | 0.8800 |
+
+> **Random Forest** achieved the best performance across all metrics with an AUC of 0.9919 and accuracy of 98.80%.
+
+---
+
+## 🛠️ Tech Stack
+
+```
+Language:       Python
+IDE:            Anaconda / Jupyter Notebook
+ML Libraries:   scikit-learn, XGBoost
+Data:           pandas, NumPy
+Visualization:  matplotlib, seaborn
+Oversampling:   imbalanced-learn (ADASYN)
+Synthetic Data: Gretel AI (ActGAN)
+```
+
+---
+
+## 🚀 How to Run
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/nidaaijaz-lab/Lung-Cancer-ML-Detection.git
+cd Lung-Cancer-ML-Detection
+```
+
+### 2. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+Or install manually:
+
+```bash
+pip install pandas numpy scikit-learn xgboost imbalanced-learn matplotlib seaborn
+```
+
+### 3. Run the notebook
+
+```bash
+jupyter notebook lung_cancer_prediction.ipynb
+```
+
+### 4. Or run the script
+
+```bash
+python lung_cancer_prediction.py
+```
+
+---
+
+## 📁 Project Structure
+
+```
+Lung-Cancer-ML-Detection/
+├── data/
+│   ├── lung_cancer.csv              # Original Kaggle dataset
+│   └── lung_cancer_synthetic.csv    # Synthetic dataset (Gretel AI)
+├── lung_cancer_prediction.ipynb     # Main Jupyter notebook
+├── lung_cancer_prediction.py        # Python script version
+├── requirements.txt                 # Dependencies
+├── figures/
+│   ├── roc_curves.png               # ROC curve comparison
+│   ├── correlation_matrix.png       # Feature correlation heatmap
+│   └── dataset_profile.png          # Dataset distribution
+└── README.md
+```
+
+---
+
+## 📝 Key Findings
+
+- **Random Forest** outperformed all other models with an AUC of 0.9919, confirming its strength for ensemble classification on tabular health data
+- **XGBoost** and **Gradient Boosting** were close runners-up, both achieving 97.60% accuracy
+- **ADASYN oversampling** effectively addressed the class imbalance, improving model recall across all classifiers
+- Lifestyle factors (smoking, alcohol consumption) and clinical symptoms (coughing, shortness of breath, chest pain) were among the most predictive features
+- Even without overt disease symptoms, ML-based risk-factor monitoring can support early screening and clinical follow-up
+
+---
+
+## 📚 Citation
+
+If you use this work, please cite:
+
+```
+Zargar, N. A., & Barnwal, A. (2024). Predictive Modeling for Lung Cancer Detection:
+Unveiling Insights through Machine Learning Techniques. Amity Institute of Biotechnology,
+Amity University, Noida, India.
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🤝 Acknowledgments
+
+- [Kaggle — Lung Cancer Dataset](https://www.kaggle.com/datasets/mysarahmadbhat/lung-cancer)
+- [Gretel AI](https://gretel.ai/) for synthetic data generation
+- Amity Institute of Biotechnology, Amity University
